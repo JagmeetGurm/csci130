@@ -25,11 +25,11 @@ func init() {
 	http.HandleFunc("/link1", linkone)
 	http.HandleFunc("/link2", linktwo)
 	//http.HandleFunc("/link3", linkthree)
-    mytemp = template.Must(template.ParseFiles("form.html","formhandler.html","link1.html","link2.html"/*,"link3.html"*/))
+    mytemp = template.Must(template.ParseFiles("index.html","indexhandler.html","link1.html","link2.html"/*,"link3.html"*/))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	err := mytemp.ExecuteTemplate(w, "form.html", nil)
+	err := mytemp.ExecuteTemplate(w, "index.html", nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -71,7 +71,7 @@ func formhandler(w http.ResponseWriter, r *http.Request) {
     }
     http.SetCookie(w, &cookie)
 
-    err := mytemp.ExecuteTemplate(w, "formhandler.html", struct{
+    err := mytemp.ExecuteTemplate(w, "indexhandler.html", struct{
         First string
         Last string
         Email string
